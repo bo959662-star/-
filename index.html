@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>烹小厨公益移动厨房 - 预约服务</title>
+    <title>烹小厨公益移动厨房 - 预约服务 (本地演示版)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
     <style>
@@ -422,6 +422,76 @@
         .gm-text { color: #555; font-size: 1rem; margin-bottom: 30px; line-height: 1.6; }
         .gm-btn { background: linear-gradient(135deg, #43a047, #2e7d32); width: 100%; padding: 15px; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(76,175,80,0.4); }
         .gm-btn:hover { box-shadow: 0 15px 30px rgba(76,175,80,0.6); transform: translateY(-2px); }
+
+        /* ===== 新增：热门菜品展示样式 ===== */
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .dish-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 235, 205, 0.5);
+        }
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .dish-img-container {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+        .dish-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .dish-card:hover img {
+            transform: scale(1.05);
+        }
+        .dish-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .dish-info {
+            padding: 20px;
+        }
+        .dish-info h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+        .dish-info p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .dish-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed var(--light-gray);
+            padding-top: 12px;
+            color: var(--gray-color);
+            font-size: 0.85rem;
+        }
+        .mt-30 { margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -513,6 +583,79 @@
                     <p class="feature-desc">微信小程序集成展示、预约、支付、评价全功能，实现指尖上的厨房</p>
                 </div>
             </div>
+
+            <!-- ===== 新增：热门菜品推荐板块 ===== -->
+            <div class="menu-section mt-30">
+                <h2 class="page-title" style="margin-top: 40px;">热门菜品推荐</h2>
+                <p class="page-subtitle">每周更新菜单，严选新鲜食材，不仅美味更注重营养搭配</p>
+                
+                <div class="dish-grid">
+                    <!-- 菜品卡片 1 -->
+                    <div class="dish-card">
+                        <div class="dish-img-container">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="健康轻食餐">
+                            <span class="dish-tag">公益特供</span>
+                        </div>
+                        <div class="dish-info">
+                            <h3>五彩时蔬轻食碗</h3>
+                            <p>精选当季时蔬搭配低脂鸡胸肉，富含膳食纤维，清爽不油腻。</p>
+                            <div class="dish-meta">
+                                <span class="calories"><i class="fas fa-fire"></i> 约350大卡</span>
+                                <span class="recommend"><i class="fas fa-thumbs-up"></i> 三高/减脂首选</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 菜品卡片 2 -->
+                    <div class="dish-card">
+                        <div class="dish-img-container">
+                            <img src=".\images\hot.jpg" alt="家常红烧肉">
+                            <span class="dish-tag">家宴必点</span>
+                        </div>
+                        <div class="dish-info">
+                            <h3>秘制家常红烧肉</h3>
+                            <p>选用三七分肥瘦猪肉，慢火炖煮两小时，入口即化，肥而不腻。</p>
+                            <div class="dish-meta">
+                                <span class="calories"><i class="fas fa-fire"></i> 约550大卡</span>
+                                <span class="recommend"><i class="fas fa-star"></i> 老人小孩喜爱</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 菜品卡片 3 -->
+                    <div class="dish-card">
+                        <div class="dish-img-container">
+                            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="养生滋补汤">
+                            <span class="dish-tag">营养滋补</span>
+                        </div>
+                        <div class="dish-info">
+                            <h3>山药排骨滋补汤</h3>
+                            <p>新鲜排骨搭配铁棍山药、枸杞，汤色浓白，营养丰富，增强免疫力。</p>
+                            <div class="dish-meta">
+                                <span class="calories"><i class="fas fa-fire"></i> 约280大卡</span>
+                                <span class="recommend"><i class="fas fa-heart"></i> 术后/产后恢复</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 菜品卡片 4 -->
+                    <div class="dish-card">
+                        <div class="dish-img-container">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="清炒时蔬">
+                            <span class="dish-tag">绿色有机</span>
+                        </div>
+                        <div class="dish-info">
+                            <h3>蒜蓉清炒有机时蔬</h3>
+                            <p>每日清晨采购的新鲜有机蔬菜，大火快炒锁住营养，口感脆嫩。</p>
+                            <div class="dish-meta">
+                                <span class="calories"><i class="fas fa-fire"></i> 约120大卡</span>
+                                <span class="recommend"><i class="fas fa-leaf"></i> 纯素食主义</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== 菜品板块结束 ===== -->
         </div>
         
         <div id="pricing-page" class="page-content">
@@ -940,932 +1083,6 @@
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4 class="footer-title">烹小厨公益移动厨房</h4>
-                    <p style="color: var(--gray-color); margin-bottom: 15px; font-size: 0.9rem;">专业营养师与厨师团队，为您量身打造专属健康美食方案，践行公益，服务社区。</p>
-                    <p style="color: var(--gray-color); font-size: 0.85rem;">服务热线：400-123-4567</p>
-                    <p style="color: var(--gray-color); font-size: 0.85rem;">邮箱：service@happinesskitchen.org</p>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">快速链接</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-page="home"><i class="fas fa-home"></i> 首页</a></li>
-                        <li><a href="#" data-page="pricing"><i class="fas fa-tag"></i> 服务定价</a></li>
-                        <li><a href="#" data-page="booking"><i class="fas fa-calendar-check"></i> 预约服务</a></li>
-                        <li><a href="#" data-page="orders"><i class="fas fa-clipboard-list"></i> 我的订单</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">服务特色</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-hand-holding-heart"></i> 公益阶梯定价</a></li>
-                        <li><a href="#"><i class="fas fa-robot"></i> AI智能分析</a></li>
-                        <li><a href="#"><i class="fas fa-mobile-alt"></i> 一体化便捷触点</a></li>
-                        <li><a href="#"><i class="fas fa-user-graduate"></i> 专业师生团队</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">关注我们</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-qrcode"></i> 微信小程序</a></li>
-                        <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
-                        <li><a href="#"><i class="fas fa-users"></i> 社区服务中心</a></li>
-                        <li><a href="#"><i class="fas fa-hands-helping"></i> 志愿服务报名</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2024 烹小厨公益移动厨房. 保留所有权利. | 公益服务热线：400-123-4567</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // === 全局状态变量 ===
-            let isGreenChannelUser = false; // 标记用户是否通过了绿色通道审核
-
-            const pages = document.querySelectorAll('.page-content');
-            const navLinks = document.querySelectorAll('nav a');
-            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-            const logo = document.getElementById('logo');
-            const heroOrderBtn = document.getElementById('hero-order-btn');
-            const footerLinks = document.querySelectorAll('.footer-links a');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mainNav = document.getElementById('main-nav');
-            const returnHomeBtn = document.getElementById('return-home');
-            const viewOrdersBtn = document.getElementById('view-orders');
-            const newOrderBtn = document.getElementById('new-order-btn');
-            
-            const cartIconBtn = document.getElementById('cart-icon-btn');
-            const cartModal = document.getElementById('cart-modal');
-            const cartModalClose = document.getElementById('cart-modal-close');
-            const cartModalBody = document.getElementById('cart-modal-body');
-            
-            let cart = [];
-            let orders = [];
-            // 购物车和订单全部通过后端 API 持久化
-            async function fetchCart() {
-                try {
-                    const res = await fetch('/api/cart');
-                    const result = await res.json();
-                    console.log('购物车数据:', result);
-                    // 后端返回的是 { success: true, data: { items: [...] } } 格式
-                    if (result.success && result.data && result.data.items) {
-                        cart = result.data.items;
-                    } else if (result.items) {
-                        cart = result.items;
-                    } else if (Array.isArray(result)) {
-                        cart = result;
-                    } else {
-                        cart = [];
-                    }
-                    console.log('解析后的购物车:', cart);
-                } catch(e) { 
-                    console.error('获取购物车失败:', e);
-                    cart = []; 
-                }
-                updateCartCount();
-            }
-            async function fetchOrders() {
-                try {
-                    const res = await fetch('/api/orders?limit=100');
-                    const result = await res.json();
-                    console.log('订单数据:', result);
-                    // 后端返回的是 { success: true, data: { orders: [...], total, ... } } 格式
-                    if (result.success && result.data && result.data.orders) {
-                        orders = result.data.orders;
-                    } else if (result.orders) {
-                        orders = result.orders;
-                    } else if (Array.isArray(result)) {
-                        orders = result;
-                    } else {
-                        orders = [];
-                    }
-                    console.log('解析后的订单:', orders);
-                } catch(e) { 
-                    console.error('获取订单失败:', e);
-                    orders = []; 
-                }
-            }
-            function updateCartCount() {
-                const cartCount = document.getElementById('cart-count');
-                if (!cartCount) return;
-                
-                // 确保 cart 是数组
-                if (!Array.isArray(cart)) {
-                    cart = [];
-                }
-                
-                const totalItems = cart.reduce((total, item) => total + (item.quantity||1), 0);
-                cartCount.textContent = totalItems;
-            }
-            // 初始化加载
-            fetchCart();
-            fetchOrders();
-            
-            function openCartModal() {
-                renderCartModal();
-                cartModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closeCartModal() {
-                cartModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            function renderCartModal() {
-                // 确保 cart 是数组
-                if (!Array.isArray(cart)) {
-                    cart = [];
-                }
-                
-                if (cart.length === 0) {
-                    cartModalBody.innerHTML = `
-                        <div class="cart-empty">
-                            <div class="cart-empty-icon"><i class="fas fa-shopping-cart"></i></div>
-                            <h3>购物车空空如也</h3>
-                            <p>快去选择您需要的服务吧</p>
-                        </div>`;
-                    return;
-                }
-                
-                let cartHTML = '<div class="cart-items">';
-                let subtotal = 0;
-                
-                cart.forEach((item, index) => {
-                    const itemPrice = parseFloat(item.price) || 0;
-                    const itemQty = parseInt(item.quantity) || 1;
-                    subtotal += itemPrice * itemQty;
-                    
-                    // 兼容 desc 和 description 字段
-                    const itemDesc = item.description || item.desc || '';
-                    
-                    cartHTML += `
-                        <div class="cart-item">
-                            <div class="cart-item-icon"><i class="${item.icon || 'fas fa-utensils'}"></i></div>
-                            <div class="cart-item-details">
-                                <div class="cart-item-name">${item.name}</div>
-                                <div class="cart-item-desc">${itemDesc}</div>
-                                <div class="cart-item-price">¥${itemPrice} × ${itemQty}</div>
-                            </div>
-                            <button class="cart-item-remove" data-index="${index}"><i class="fas fa-trash"></i></button>
-                        </div>`;
-                });
-                cartHTML += '</div>';
-                
-                const total = subtotal;
-                cartHTML += `
-                    <div class="cart-summary">
-                        <div class="cart-summary-row"><span>小计</span><span>¥${subtotal}</span></div>
-                        <div class="cart-total"><span>总计</span><span>¥${total}</span></div>
-                        <div class="cart-actions">
-                            <button class="cart-btn cart-btn-clear" id="cart-clear-btn">清空购物车</button>
-                            <button class="cart-btn cart-btn-checkout" id="cart-checkout-btn">去结算</button>
-                        </div>
-                    </div>`;
-                
-                cartModalBody.innerHTML = cartHTML;
-                
-                document.querySelectorAll('.cart-item-remove').forEach(btn => {
-                    btn.addEventListener('click', async function() {
-                        const index = parseInt(this.getAttribute('data-index'));
-                        const item = cart[index];
-                        if (!item || !item.id) return;
-                        
-                        try {
-                            // 使用正确的 DELETE 方法
-                            const response = await fetch(`/api/cart/${item.id}`, {
-                                method: 'DELETE'
-                            });
-                            const result = await response.json();
-                            
-                            if (result.success) {
-                                await fetchCart();
-                                renderCartModal();
-                            } else {
-                                alert('删除失败: ' + (result.error || '未知错误'));
-                            }
-                        } catch(e) {
-                            console.error('删除购物车项目失败:', e);
-                            alert('删除失败，请重试');
-                        }
-                    });
-                });
-                const clearBtn = document.getElementById('cart-clear-btn');
-                if (clearBtn) {
-                    clearBtn.addEventListener('click', async function() {
-                        if (confirm('确定要清空购物车吗？')) {
-                            try {
-                                const response = await fetch('/api/cart/clear', { 
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({})
-                                });
-                                const result = await response.json();
-                                
-                                if (result.success) {
-                                    await fetchCart();
-                                    renderCartModal();
-                                } else {
-                                    alert('清空失败: ' + (result.error || '未知错误'));
-                                }
-                            } catch(e) {
-                                console.error('清空购物车失败:', e);
-                                alert('清空失败，请重试');
-                            }
-                        }
-                    });
-                }
-                
-                const checkoutBtn = document.getElementById('cart-checkout-btn');
-                if (checkoutBtn) {
-                    checkoutBtn.addEventListener('click', function() {
-                        alert('感谢您的选择！请继续完成预约流程。');
-                        closeCartModal();
-                        switchPage('booking-page');
-                    });
-                }
-            }
-            
-            if (cartIconBtn) cartIconBtn.addEventListener('click', openCartModal);
-            if (cartModalClose) cartModalClose.addEventListener('click', closeCartModal);
-            if (cartModal) cartModal.addEventListener('click', function(e) { if (e.target === cartModal) closeCartModal(); });
-            
-            if (mobileMenuBtn && mainNav) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    const icon = this.querySelector('i');
-                    if (mainNav.classList.contains('active')) {
-                        icon.classList.remove('fa-bars'); icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times'); icon.classList.add('fa-bars');
-                    }
-                });
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                    });
-                });
-            }
-            
-            function switchPage(pageId) {
-                pages.forEach(page => page.classList.remove('page-active'));
-                const targetPage = document.getElementById(pageId);
-                if (targetPage) targetPage.classList.add('page-active');
-                
-                navLinks.forEach(link => {
-                    if (link.getAttribute('data-page') + '-page' === pageId) link.classList.add('nav-active');
-                    else link.classList.remove('nav-active');
-                });
-                
-                mobileNavItems.forEach(item => {
-                    if (item.getAttribute('data-page') + '-page' === pageId) item.classList.add('active');
-                    else item.classList.remove('active');
-                });
-                
-                if (pageId === 'booking-page') initBookingProcess();
-                if (pageId === 'orders-page') {
-                    // 切换到订单页面时重新获取最新数据
-                    fetchOrders().then(() => renderOrdersList());
-                }
-                
-                window.scrollTo(0, 0);
-            }
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    switchPage(this.getAttribute('data-page') + '-page');
-                });
-            });
-            
-            mobileNavItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    switchPage(this.getAttribute('data-page') + '-page');
-                });
-            });
-            
-            if (heroOrderBtn) heroOrderBtn.addEventListener('click', function() { switchPage('booking-page'); });
-            if (returnHomeBtn) returnHomeBtn.addEventListener('click', function() { switchPage('home-page'); });
-            if (viewOrdersBtn) viewOrdersBtn.addEventListener('click', function() { switchPage('orders-page'); });
-            if (newOrderBtn) newOrderBtn.addEventListener('click', function() { switchPage('booking-page'); });
-            if (logo) logo.addEventListener('click', function() { switchPage('home-page'); });
-            
-            footerLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (this.getAttribute('data-page')) {
-                        e.preventDefault();
-                        switchPage(this.getAttribute('data-page') + '-page');
-                    }
-                });
-            });
-            
-            switchPage('home-page');
-            
-            function renderOrdersList() {
-                const ordersListContainer = document.getElementById('orders-list-container');
-                console.log('渲染订单列表，订单数量:', orders.length);
-                console.log('订单数据:', orders);
-                
-                if (orders.length === 0) {
-                    ordersListContainer.innerHTML = `
-                        <div class="orders-empty">
-                            <div class="orders-empty-icon"><i class="fas fa-clipboard-list"></i></div>
-                            <h3 class="orders-empty-title">您还没有任何订单</h3>
-                            <p class="orders-empty-text">快去预约我们的服务吧，我们将为您提供专业的健康餐饮服务！</p>
-                            <button class="hero-btn" id="empty-order-btn" style="max-width: 200px;">立即预约</button>
-                        </div>`;
-                    const emptyBtn = document.getElementById('empty-order-btn');
-                    if (emptyBtn) emptyBtn.addEventListener('click', function() { switchPage('booking-page'); });
-                    return;
-                }
-                
-                const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date));
-                let ordersHTML = '<div class="orders-list">';
-                
-                sortedOrders.forEach(order => {
-                    console.log('处理订单:', order);
-                    let statusText = '', statusClass = '';
-                    switch(order.status) {
-                        case 'pending': statusText = '待确认'; statusClass = 'pending'; break;
-                        case 'confirmed': statusText = '已确认'; statusClass = 'confirmed'; break;
-                        case 'completed': statusText = '已完成'; statusClass = 'completed'; break;
-                        default: statusText = '待确认'; statusClass = 'pending';
-                    }
-                    
-                    // 兼容新旧字段名
-                    const orderId = order.order_number || order.id;
-                    const serviceName = order.service_name || order.serviceName || '未知服务';
-                    const frequencyName = order.frequency_name || order.frequency || '未知频率';
-                    const peopleName = order.people_name || order.people || '未知';
-                    const serviceTime = order.service_time || order.time || '未选择';
-                    
-                    // 安全解析数组字段
-                    let needsArray = [];
-                    try {
-                        if (Array.isArray(order.needs)) {
-                            needsArray = order.needs;
-                        } else if (typeof order.needs === 'string' && order.needs) {
-                            needsArray = JSON.parse(order.needs);
-                        }
-                    } catch(e) {
-                        console.error('解析needs失败:', e, order.needs);
-                        needsArray = [];
-                    }
-                    
-                    let restrictionsArray = [];
-                    try {
-                        if (Array.isArray(order.restrictions)) {
-                            restrictionsArray = order.restrictions;
-                        } else if (typeof order.restrictions === 'string' && order.restrictions) {
-                            restrictionsArray = JSON.parse(order.restrictions);
-                        }
-                    } catch(e) {
-                        console.error('解析restrictions失败:', e, order.restrictions);
-                        restrictionsArray = [];
-                    }
-                    
-                    const tasteName = order.taste_name || order.taste || '未选择';
-                    const paymentMethod = order.payment_method || order.payment || '未知';
-                    
-                    ordersHTML += `
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div class="order-info"><div class="order-number">订单号：${orderId}</div><div class="order-date">下单时间：${order.date}</div></div>
-                                <div class="order-status ${statusClass}">${statusText}</div>
-                            </div>
-                            <div class="order-body">
-                                <div class="order-details">
-                                    <div class="order-detail"><div class="order-detail-label">服务类型</div><div class="order-detail-value">${serviceName}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">服务频率</div><div class="order-detail-value">${frequencyName}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">联系人</div><div class="order-detail-value">${order.name}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">联系电话</div><div class="order-detail-value">${order.phone}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">服务地址</div><div class="order-detail-value">${order.address}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">用餐人数</div><div class="order-detail-value">${peopleName}</div></div>
-                                    <div class="order-detail"><div class="order-detail-label">服务时间</div><div class="order-detail-value">${serviceTime}</div></div>
-                                </div>
-                            </div>
-                            <div class="order-footer">
-                                <div class="order-total">¥${order.price}</div>
-                                <div class="order-actions">
-                                    <button class="order-action-btn view" data-id="${orderId}">查看详情</button>
-                                    ${order.status === 'pending' ? '<button class="order-action-btn cancel" data-id="' + orderId + '">取消订单</button>' : ''}
-                                </div>
-                            </div>
-                        </div>`;
-                });
-                
-                ordersHTML += '</div>';
-                ordersListContainer.innerHTML = ordersHTML;
-                
-                document.querySelectorAll('.order-action-btn.view').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const orderId = this.getAttribute('data-id');
-                        const order = orders.find(o => (o.order_number || o.id) === orderId);
-                        if (order) {
-                            const serviceName = order.service_name || order.serviceName || '未知服务';
-                            const frequencyName = order.frequency_name || order.frequency || '未知频率';
-                            const peopleName = order.people_name || order.people || '未知';
-                            const serviceTime = order.service_time || order.time || '未选择';
-                            const needsArray = Array.isArray(order.needs) ? order.needs : (order.needs ? JSON.parse(order.needs) : []);
-                            const restrictionsArray = Array.isArray(order.restrictions) ? order.restrictions : (order.restrictions ? JSON.parse(order.restrictions) : []);
-                            const tasteName = order.taste_name || order.taste || '未选择';
-                            const paymentMethod = order.payment_method || order.payment || '未知';
-                            
-                            let details = `订单详情：\n\n订单号：${orderId}\n下单时间：${order.date}\n服务类型：${serviceName}\n服务频率：${frequencyName}\n联系人：${order.name}\n联系电话：${order.phone}\n服务地址：${order.address}\n用餐人数：${peopleName}\n服务时间：${serviceTime}\n特殊需求：${needsArray.join(', ')}\n饮食禁忌：${restrictionsArray.join(', ')}\n口味偏好：${tasteName}\n支付方式：${paymentMethod}\n订单金额：¥${order.price}\n`;
-                            alert(details);
-                        }
-                    });
-                });
-                
-                document.querySelectorAll('.order-action-btn.cancel').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const orderId = this.getAttribute('data-id');
-                        if (confirm('确定要取消此订单吗？')) {
-                            const orderIndex = orders.findIndex(o => o.id === orderId);
-                            if (orderIndex !== -1) {
-                                orders.splice(orderIndex, 1);
-                                saveOrders();
-                                renderOrdersList();
-                                alert('订单已取消！');
-                            }
-                        }
-                    });
-                });
-            }
-            
-            // 修复：定义 saveOrders 方法，将订单持久化到后端
-            async function saveOrders() {
-                try {
-                    await fetch('/api/orders/save', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(orders)
-                    });
-                } catch(e) {
-                    console.error('订单保存失败', e);
-                }
-            }
-
-            // --- 价格按钮逻辑 ---
-            document.querySelectorAll('.pricing-btn').forEach(btn => {
-                btn.addEventListener('click', async function() {
-                    const planName = this.getAttribute('data-plan');
-                    
-                    if (planName === '公益基础套餐') {
-                        const greenChannel = document.getElementById('green-channel');
-                        if (greenChannel) {
-                            greenChannel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            greenChannel.style.transition = "transform 0.3s, box-shadow 0.3s";
-                            greenChannel.style.transform = "scale(1.02)";
-                            greenChannel.style.boxShadow = "0 0 0 4px rgba(76, 175, 80, 0.5)";
-                            setTimeout(() => {
-                                greenChannel.style.transform = "none";
-                                greenChannel.style.boxShadow = "0 12px 30px rgba(76,175,80,0.25)";
-                            }, 500);
-                        }
-                        return;
-                    }
-
-                    const planPrice = planName === '家庭健康套餐' ? 50 : null;
-                    
-                    if (planPrice !== null) {
-                        await fetch('/api/cart/add', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                id: 'plan-' + Date.now(),
-                                name: planName,
-                                desc: '移动厨房服务套餐',
-                                price: planPrice,
-                                quantity: 1,
-                                icon: 'fas fa-utensils'
-                            })
-                        });
-                        await fetchCart();
-                        updateCartCount();
-                        alert(`"${planName}" 已添加到购物车！`);
-                    } else {
-                        alert("请联系我们的客服定制企业团餐服务！\n\n服务热线：400-123-4567");
-                    }
-                });
-            });
-
-            // --- 绿色通道审核逻辑 (新增) ---
-            const greenSubmitBtn = document.querySelector('#green-channel button');
-            const greenModal = document.getElementById('green-channel-modal');
-            const goToBookBtn = document.getElementById('go-to-book-btn');
-
-            if(greenSubmitBtn) {
-                greenSubmitBtn.addEventListener('click', function() {
-                    // 新增：文件校验逻辑
-                    const greenFile = document.getElementById('green-file-input');
-                    if (!greenFile || greenFile.files.length === 0) {
-                        alert('请先上传审核材料证明！'); // 没上传时弹出提示
-                        return; // 终止执行，不进入审核
-                    }
-
-                    // 模拟审核加载
-                    const originalText = this.innerText;
-                    this.innerText = "材料上传中... (模拟审核)";
-                    this.style.opacity = "0.7";
-                    this.disabled = true;
-
-                    setTimeout(() => {
-                        this.innerText = "审核通过！";
-                        this.style.background = "#2e7d32";
-                        
-                        setTimeout(() => {
-                            // 激活全局公益状态
-                            activateGreenChannel();
-                            // 显示弹窗
-                            greenModal.classList.add('active');
-                            // 恢复按钮状态
-                            this.innerText = originalText;
-                            this.style.opacity = "1";
-                            this.disabled = false;
-                        }, 500);
-                    }, 1500);
-                });
-            }
-
-            // 激活绿色通道状态
-            function activateGreenChannel() {
-                isGreenChannelUser = true;
-                
-                // 更新UI显示（将价格变为0）
-                const simpleOpt = document.getElementById('opt-simple');
-                const familyOpt = document.getElementById('opt-family');
-                
-                if(simpleOpt) {
-                    simpleOpt.setAttribute('data-price', '0');
-                    simpleOpt.querySelector('.service-price').innerHTML = `
-                        <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">¥50</span> 
-                        <span style="color: #2e7d32; font-size: 1.2rem;">¥0</span> 
-                        <span style="color: #e67e22; font-size: 0.8rem;">(公益价)</span>
-                    `;
-                    simpleOpt.style.borderColor = "#4caf50";
-                    simpleOpt.style.background = "#e8f5e9";
-                }
-                
-                if(familyOpt) {
-                    familyOpt.setAttribute('data-price', '0'); // 服务费另算，这里仅示意
-                    familyOpt.querySelector('.service-price').innerHTML = `
-                        <span style="text-decoration: line-through; color: #999;">20%</span> 
-                        <span style="color: #2e7d32;">10%</span> 
-                        <span style="color: #e67e22; font-size: 0.8rem;">(公益服务费)</span>
-                    `;
-                }
-            }
-
-            // 弹窗跳转
-            if(goToBookBtn) {
-                goToBookBtn.addEventListener('click', function() {
-                    greenModal.classList.remove('active');
-                    switchPage('booking-page');
-                    // 自动选中公益套餐
-                    const simpleOpt = document.getElementById('opt-simple');
-                    if(simpleOpt) simpleOpt.click();
-                });
-            }
-            // ----------------------------------------
-            
-            const analyzeBtn = document.getElementById('analyze-btn');
-            const aiResult = document.getElementById('ai-result');
-            
-            if (analyzeBtn) {
-                analyzeBtn.addEventListener('click', async function() {
-                    console.log('开始AI分析...');
-                    const peopleCount = document.getElementById('people-count').value;
-                    const servicePeriod = document.getElementById('service-period').value;
-                    const specialNeeds = getSelectedCheckboxValues('special-needs');
-                    const dietRestrictions = getSelectedCheckboxValues('diet-restrictions');
-                    const tastePreference = getSelectedCheckboxValues('taste-preference');
-                    const additionalRequirements = document.getElementById('additional-requirements').value;
-                    
-                    let analysis = `根据您的需求，AI系统为您推荐以下方案：\n\n👥 用餐人数：${peopleCount}人\n📅 服务周期：${servicePeriod}天\n`;
-                    if (specialNeeds.length > 0) analysis += `❤️ 特殊需求：${specialNeeds.join(', ')}\n`;
-                    if (dietRestrictions.length > 0) analysis += `🚫 饮食禁忌：${dietRestrictions.join(', ')}\n`;
-                    if (tastePreference.length > 0) analysis += `👅 口味偏好：${tastePreference.join(', ')}\n`;
-                    if (additionalRequirements.trim() !== '') analysis += `📝 其他要求：${additionalRequirements}\n`;
-                    
-                    const tags = [];
-                    if (specialNeeds.includes('三高饮食')) tags.push('低盐低脂');
-                    if (specialNeeds.includes('减脂健身')) tags.push('低卡高蛋白');
-                    if (specialNeeds.includes('素食主义')) tags.push('全植物饮食');
-                    if (tastePreference.includes('清淡')) tags.push('清淡口味');
-                    if (tastePreference.includes('少油')) tags.push('少油烹饪');
-                    if (tastePreference.includes('家乡味')) tags.push('家乡风味');
-                    if (tags.length === 0) tags.push('均衡营养', '家常口味', '健康烹饪');
-                    
-                    aiResult.innerHTML = `
-                        <h4 class="ai-result-title"><i class="fas fa-lightbulb"></i> 推荐方案</h4>
-                        <p style="color: var(--gray-color); font-size: 0.95rem; margin-bottom: 15px; white-space: pre-line;">${analysis}</p>
-                        <div class="ai-tags">${tags.map(tag => `<div class="ai-tag">${tag}</div>`).join('')}</div>
-                        <div class="mt-20" style="background-color: rgba(240, 247, 255, 0.5); border-radius: var(--border-radius); padding: 15px; margin-top: 20px;">
-                            <p style="color: var(--info-color); font-size: 0.9rem; font-weight: 500;"><i class="fas fa-info-circle"></i> 正在添加到购物车...</p>
-                        </div>`;
-                    
-                    // 添加到购物车
-                    const cartItem = {
-                        id: 'custom-' + Date.now(),
-                        name: '个性化定制方案',
-                        desc: `AI智能推荐方案（${peopleCount}人，${servicePeriod}天）`,
-                        description: `AI智能推荐方案（${peopleCount}人，${servicePeriod}天）`,
-                        price: 50 * servicePeriod,
-                        quantity: 1,
-                        icon: 'fas fa-robot'
-                    };
-                    
-                    console.log('准备添加到购物车:', cartItem);
-                    
-                    try {
-                        const response = await fetch('/api/cart/add', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(cartItem)
-                        });
-                        
-                        const result = await response.json();
-                        console.log('添加购物车响应:', result);
-                        
-                        if (result.success) {
-                            await fetchCart();
-                            updateCartCount();
-                            
-                            aiResult.innerHTML = `
-                                <h4 class="ai-result-title"><i class="fas fa-lightbulb"></i> 推荐方案</h4>
-                                <p style="color: var(--gray-color); font-size: 0.95rem; margin-bottom: 15px; white-space: pre-line;">${analysis}</p>
-                                <div class="ai-tags">${tags.map(tag => `<div class="ai-tag">${tag}</div>`).join('')}</div>
-                                <div class="mt-20" style="background-color: rgba(240, 247, 255, 0.5); border-radius: var(--border-radius); padding: 15px; margin-top: 20px;">
-                                    <p style="color: var(--success-color); font-size: 0.9rem; font-weight: 500;"><i class="fas fa-check-circle"></i> 已成功添加到购物车！</p>
-                                </div>`;
-                            
-                            // 显示成功提示并自动跳转到购物车
-                            alert(`AI分析完成！个性化方案已生成并添加到购物车。\n\n我们的专业师生团队将对方案进行最终审核，确保科学性与可行性。\n\n即将跳转到购物车...`);
-                            
-                            // 延迟1秒后打开购物车
-                            setTimeout(() => {
-                                openCartModal();
-                            }, 1000);
-                        } else {
-                            console.error('添加购物车失败:', result);
-                            alert('添加购物车失败: ' + (result.error || '未知错误'));
-                        }
-                    } catch (error) {
-                        console.error('添加购物车出错:', error);
-                        alert('添加购物车失败，请检查网络连接');
-                    }
-                });
-            }
-            
-            function getSelectedCheckboxValues(containerId) {
-                const container = document.getElementById(containerId);
-                const checkedCheckboxes = container.querySelectorAll('input:checked');
-                const values = [];
-                checkedCheckboxes.forEach(checkbox => { values.push(checkbox.closest('.checkbox-item').getAttribute('data-value')); });
-                return values;
-            }
-            
-            function bindCheckboxEvents() {
-                const checkboxItems = document.querySelectorAll('#customize-page .checkbox-item');
-                checkboxItems.forEach(item => {
-                    const newItem = item.cloneNode(true);
-                    item.parentNode.replaceChild(newItem, item);
-                    newItem.addEventListener('click', function() {
-                        const checkbox = this.querySelector('input');
-                        checkbox.checked = !checkbox.checked;
-                        checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
-                    });
-                });
-            }
-            bindCheckboxEvents();
-            
-            function initBookingProcess() {
-                let currentStep = 1;
-                const totalSteps = 5;
-                let bookingData = { service: 'simple', serviceName: '简单餐食制作', price: 50, frequency: 'weekly', frequencyName: '每周一次', name: '', phone: '', address: '', people: '2-3', peopleName: '2-3人', time: '', needs: ['减脂健身'], restrictions: ['不吃葱姜蒜'], taste: '清淡', tasteName: '清淡', payment: 'wechat', paymentName: '微信支付' };
-                
-                if(isGreenChannelUser) {
-                    bookingData.price = 0;
-                }
-
-                function updateSteps() {
-                    document.querySelectorAll('.step').forEach((step, index) => { index + 1 === currentStep ? step.classList.add('active') : step.classList.remove('active'); });
-                    document.querySelectorAll('.booking-step').forEach((step, index) => { index + 1 === currentStep ? step.classList.add('active') : step.classList.remove('active'); });
-                    const prevBtn = document.getElementById('prev-btn');
-                    const nextBtn = document.getElementById('next-btn');
-                    
-                    if (currentStep === 1) { prevBtn.style.display = 'none'; nextBtn.textContent = '下一步'; }
-                    else if (currentStep === totalSteps) { prevBtn.style.display = 'inline-block'; nextBtn.style.display = 'none'; }
-                    else if (currentStep === totalSteps - 1) { prevBtn.style.display = 'inline-block'; nextBtn.textContent = '确认支付'; nextBtn.style.display = 'inline-block'; }
-                    else { prevBtn.style.display = 'inline-block'; nextBtn.textContent = '下一步'; nextBtn.style.display = 'inline-block'; }
-                    if (currentStep === 4) updateOrderSummary();
-                }
-                
-                function updateOrderSummary() {
-                    let totalPrice = bookingData.price;
-                    if (isGreenChannelUser && bookingData.service === 'simple') {
-                        totalPrice = 0;
-                    } else {
-                        if (bookingData.frequency === 'weekly') totalPrice *= 4;
-                        if (bookingData.frequency === 'biweekly') totalPrice *= 8;
-                        if (bookingData.frequency === 'monthly') totalPrice *= 1;
-                    }
-
-                    document.getElementById('summary-service').textContent = bookingData.serviceName;
-                    document.getElementById('summary-frequency').textContent = bookingData.frequencyName;
-                    document.getElementById('summary-name').textContent = bookingData.name || '未填写';
-                    document.getElementById('summary-phone').textContent = bookingData.phone || '未填写';
-                    document.getElementById('summary-address').textContent = bookingData.address || '未填写';
-                    document.getElementById('summary-people').textContent = bookingData.peopleName;
-                    document.getElementById('summary-time').textContent = bookingData.time || '未选择';
-                    document.getElementById('summary-needs').textContent = bookingData.needs.join(', ');
-                    document.getElementById('summary-restrictions').textContent = bookingData.restrictions.join(', ');
-                    document.getElementById('summary-taste').textContent = bookingData.tasteName;
-                    document.getElementById('summary-total').textContent = '¥' + totalPrice;
-                }
-                
-                document.querySelectorAll('.service-option').forEach(option => {
-                    option.addEventListener('click', function() {
-                        document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        bookingData.service = this.getAttribute('data-service');
-                        bookingData.serviceName = this.querySelector('.service-name').textContent;
-                        bookingData.price = parseInt(this.getAttribute('data-price'));
-                    });
-                });
-                
-                document.querySelectorAll('.radio-option[data-frequency]').forEach(option => {
-                    option.addEventListener('click', function() {
-                        document.querySelectorAll('.radio-option[data-frequency]').forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        bookingData.frequency = this.getAttribute('data-frequency');
-                        bookingData.frequencyName = this.querySelector('label').textContent;
-                    });
-                });
-                
-                document.getElementById('contact-name').addEventListener('input', function() { bookingData.name = this.value; });
-                document.getElementById('contact-phone').addEventListener('input', function() { bookingData.phone = this.value; });
-                document.getElementById('service-address').addEventListener('input', function() { bookingData.address = this.value; });
-                document.getElementById('service-time').addEventListener('change', function() { if(this.value) bookingData.time = new Date(this.value).toLocaleString('zh-CN', {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}); });
-                
-                document.querySelectorAll('.radio-option[data-people]').forEach(option => {
-                    option.addEventListener('click', function() {
-                        document.querySelectorAll('.radio-option[data-people]').forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        bookingData.people = this.getAttribute('data-people');
-                        bookingData.peopleName = this.querySelector('label').textContent;
-                    });
-                });
-                
-                document.querySelectorAll('.checkbox-option[data-need]').forEach(option => {
-                    option.addEventListener('click', function() {
-                        const checkbox = this.querySelector('input');
-                        checkbox.checked = !checkbox.checked;
-                        checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
-                        const need = this.getAttribute('data-need');
-                        if (checkbox.checked) {
-                            if (!bookingData.needs.includes(need)) bookingData.needs.push(need);
-                        } else {
-                            bookingData.needs = bookingData.needs.filter(n => n !== need);
-                        }
-                    });
-                });
-                
-                document.querySelectorAll('.checkbox-option[data-restriction]').forEach(option => {
-                    option.addEventListener('click', function() {
-                        const checkbox = this.querySelector('input');
-                        checkbox.checked = !checkbox.checked;
-                        checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
-                        const r = this.getAttribute('data-restriction');
-                        if (checkbox.checked) {
-                            if (!bookingData.restrictions.includes(r)) bookingData.restrictions.push(r);
-                        } else {
-                            bookingData.restrictions = bookingData.restrictions.filter(item => item !== r);
-                        }
-                    });
-                });
-                
-                document.querySelectorAll('.radio-option[data-taste]').forEach(option => {
-                    option.addEventListener('click', function() {
-                        document.querySelectorAll('.radio-option[data-taste]').forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        bookingData.taste = this.getAttribute('data-taste');
-                        bookingData.tasteName = this.querySelector('label').textContent;
-                    });
-                });
-                
-                // ===== 修复：确保支付方式可以点击 =====
-                document.querySelectorAll('.payment-method').forEach(method => {
-                    method.addEventListener('click', function() {
-                        // 移除所有选中状态
-                        document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
-                        // 添加当前选中状态
-                        this.classList.add('selected');
-                        // 更新数据
-                        bookingData.payment = this.getAttribute('data-payment');
-                        bookingData.paymentName = this.querySelector('.payment-name').textContent;
-                    });
-                });
-
-                document.getElementById('next-btn').addEventListener('click', async function() {
-                    if (currentStep === 1 && !bookingData.service) { alert('请选择服务类型'); return; }
-                    else if (currentStep === 2) {
-                        if (!bookingData.name.trim()) { alert('请输入联系人姓名'); document.getElementById('contact-name').focus(); return; }
-                        if (!bookingData.phone.trim()) { alert('请输入联系电话'); document.getElementById('contact-phone').focus(); return; }
-                        if (!bookingData.address.trim()) { alert('请输入服务地址'); document.getElementById('service-address').focus(); return; }
-                        if (!bookingData.time) { alert('请选择服务时间'); document.getElementById('service-time').focus(); return; }
-                    } else if (currentStep === 4) {
-                        // 生成订单号
-                        const orderNumber = 'HL' + new Date().getFullYear() + (new Date().getMonth() + 1).toString().padStart(2, '0') + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-                        document.getElementById('order-number').textContent = orderNumber;
-                        
-                        const today = new Date();
-                        const orderDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-                        
-                        // 计算总价
-                        let totalPrice = bookingData.price;
-                        if(isGreenChannelUser && bookingData.service === 'simple') {
-                            totalPrice = 0;
-                        } else {
-                            if (bookingData.frequency === 'weekly') totalPrice *= 4;
-                            if (bookingData.frequency === 'biweekly') totalPrice *= 8;
-                            if (bookingData.frequency === 'monthly') totalPrice *= 1;
-                        }
-                        
-                        // 构建订单数据
-                        const newOrder = {
-                            id: orderNumber,
-                            order_number: orderNumber,
-                            date: orderDate,
-                            status: 'pending',
-                            service_type: bookingData.service,
-                            service_name: bookingData.serviceName,
-                            frequency: bookingData.frequency,
-                            frequency_name: bookingData.frequencyName,
-                            name: bookingData.name,
-                            phone: bookingData.phone,
-                            address: bookingData.address,
-                            people: bookingData.people,
-                            people_name: bookingData.peopleName,
-                            service_time: bookingData.time,
-                            needs: bookingData.needs,
-                            restrictions: bookingData.restrictions,
-                            taste: bookingData.taste,
-                            taste_name: bookingData.tasteName,
-                            price: totalPrice,
-                            payment_method: bookingData.payment,
-                            is_charity: isGreenChannelUser ? 1 : 0
-                        };
-                        
-                        // 提交订单到后端
-                        try {
-                            const response = await fetch('/api/orders', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(newOrder)
-                            });
-                            
-                            const result = await response.json();
-                            
-                            if (result.success) {
-                                console.log('订单创建成功:', result);
-                            } else {
-                                console.error('订单创建失败:', result.error);
-                                alert('订单创建失败: ' + result.error);
-                                return;
-                            }
-                        } catch (error) {
-                            console.error('提交订单出错:', error);
-                            alert('提交订单失败，请检查网络连接');
-                            return;
-                        }
-                    }
-                    
-                    // 进入下一步
-                    if (currentStep < totalSteps) { 
-                        currentStep++; 
-                        updateSteps(); 
-                    }
-                });
-                
-                document.getElementById('prev-btn').addEventListener('click', function() { if (currentStep > 1) { currentStep--; updateSteps(); } });
-                updateSteps();
-            }
-            
-            document.addEventListener('touchstart', function() {}, {passive: true});
-        });
-    </script>
-
     <!-- ===== 绿色通道（公益家庭） ===== -->
     <section id="green-channel" style="
     max-width:900px;
@@ -1913,5 +1130,719 @@
       </button>
     </section>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">烹小厨公益移动厨房</h4>
+                    <p style="color: var(--gray-color); margin-bottom: 15px; font-size: 0.9rem;">专业营养师与厨师团队，为您量身打造专属健康美食方案，践行公益，服务社区。</p>
+                    <p style="color: var(--gray-color); font-size: 0.85rem;">服务热线：400-123-4567</p>
+                    <p style="color: var(--gray-color); font-size: 0.85rem;">邮箱：service@happinesskitchen.org</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-page="home"><i class="fas fa-home"></i> 首页</a></li>
+                        <li><a href="#" data-page="pricing"><i class="fas fa-tag"></i> 服务定价</a></li>
+                        <li><a href="#" data-page="booking"><i class="fas fa-calendar-check"></i> 预约服务</a></li>
+                        <li><a href="#" data-page="orders"><i class="fas fa-clipboard-list"></i> 我的订单</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">服务特色</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-hand-holding-heart"></i> 公益阶梯定价</a></li>
+                        <li><a href="#"><i class="fas fa-robot"></i> AI智能分析</a></li>
+                        <li><a href="#"><i class="fas fa-mobile-alt"></i> 一体化便捷触点</a></li>
+                        <li><a href="#"><i class="fas fa-user-graduate"></i> 专业师生团队</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">关注我们</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-qrcode"></i> 微信小程序</a></li>
+                        <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> 社区服务中心</a></li>
+                        <li><a href="#"><i class="fas fa-hands-helping"></i> 志愿服务报名</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 烹小厨公益移动厨房. 保留所有权利. | 公益服务热线：400-123-4567</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // === 全局状态变量 ===
+        let isGreenChannelUser = false; 
+
+        // === 1. 初始化本地数据模拟 (替代后端API) ===
+        // 从本地存储加载购物车和订单，如果没有则初始化为空数组
+        let cart = JSON.parse(localStorage.getItem('my_kitchen_cart')) || [];
+        let orders = JSON.parse(localStorage.getItem('my_kitchen_orders')) || [];
+
+        // DOM 元素引用
+        const pages = document.querySelectorAll('.page-content');
+        const navLinks = document.querySelectorAll('nav a');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+        const logo = document.getElementById('logo');
+        const heroOrderBtn = document.getElementById('hero-order-btn');
+        const footerLinks = document.querySelectorAll('.footer-links a');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        const returnHomeBtn = document.getElementById('return-home');
+        const viewOrdersBtn = document.getElementById('view-orders');
+        const newOrderBtn = document.getElementById('new-order-btn');
+        const cartIconBtn = document.getElementById('cart-icon-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const cartModalClose = document.getElementById('cart-modal-close');
+        const cartModalBody = document.getElementById('cart-modal-body');
+
+        // 更新购物车角标
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const totalItems = cart.reduce((total, item) => total + (item.quantity||1), 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // 保存购物车到本地
+        function saveCart() {
+            localStorage.setItem('my_kitchen_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // 保存订单到本地
+        function saveOrders() {
+            localStorage.setItem('my_kitchen_orders', JSON.stringify(orders));
+        }
+
+        // 初始化运行
+        updateCartCount();
+        
+        // === 2. 购物车逻辑 (本地化) ===
+        function openCartModal() {
+            renderCartModal();
+            cartModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCartModal() {
+            cartModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function renderCartModal() {
+            if (cart.length === 0) {
+                cartModalBody.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <h3>购物车空空如也</h3>
+                        <p>快去选择您需要的服务吧</p>
+                    </div>`;
+                return;
+            }
+            
+            let cartHTML = '<div class="cart-items">';
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.quantity;
+                cartHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-icon"><i class="${item.icon || 'fas fa-utensils'}"></i></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-desc">${item.desc || ''}</div>
+                            <div class="cart-item-price">¥${item.price}</div>
+                        </div>
+                        <button class="cart-item-remove" data-index="${index}"><i class="fas fa-trash"></i></button>
+                    </div>`;
+            });
+            cartHTML += '</div>';
+            
+            cartHTML += `
+                <div class="cart-summary">
+                    <div class="cart-summary-row"><span>小计</span><span>¥${subtotal}</span></div>
+                    <div class="cart-total"><span>总计</span><span>¥${subtotal}</span></div>
+                    <div class="cart-actions">
+                        <button class="cart-btn cart-btn-clear" id="cart-clear-btn">清空购物车</button>
+                        <button class="cart-btn cart-btn-checkout" id="cart-checkout-btn">去结算</button>
+                    </div>
+                </div>`;
+            
+            cartModalBody.innerHTML = cartHTML;
+            
+            // 绑定删除事件
+            document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.splice(index, 1); // 本地删除
+                    saveCart();
+                    renderCartModal();
+                });
+            });
+
+            // 绑定清空事件
+            const clearBtn = document.getElementById('cart-clear-btn');
+            if(clearBtn) {
+                clearBtn.addEventListener('click', function() {
+                    if (confirm('确定要清空购物车吗？')) {
+                        cart = [];
+                        saveCart();
+                        renderCartModal();
+                    }
+                });
+            }
+            
+            // 绑定去结算事件
+            const checkoutBtn = document.getElementById('cart-checkout-btn');
+            if(checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    alert('感谢您的选择！请继续完成预约流程。');
+                    closeCartModal();
+                    switchPage('booking-page');
+                });
+            }
+        }
+        
+        cartIconBtn.addEventListener('click', openCartModal);
+        cartModalClose.addEventListener('click', closeCartModal);
+        cartModal.addEventListener('click', function(e) { if (e.target === cartModal) closeCartModal(); });
+        
+        // === 3. 导航与页面切换逻辑 ===
+        if (mobileMenuBtn && mainNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars'); icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times'); icon.classList.add('fa-bars');
+                }
+            });
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+        }
+        
+        function switchPage(pageId) {
+            pages.forEach(page => page.classList.remove('page-active'));
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.classList.add('page-active');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-page') + '-page' === pageId) link.classList.add('nav-active');
+                else link.classList.remove('nav-active');
+            });
+            
+            mobileNavItems.forEach(item => {
+                if (item.getAttribute('data-page') + '-page' === pageId) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+            
+            if (pageId === 'booking-page') initBookingProcess();
+            if (pageId === 'orders-page') renderOrdersList();
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // 绑定导航点击事件
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage(this.getAttribute('data-page') + '-page');
+            });
+        });
+        mobileNavItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage(this.getAttribute('data-page') + '-page');
+            });
+        });
+        
+        if (heroOrderBtn) heroOrderBtn.addEventListener('click', function() { switchPage('booking-page'); });
+        if (returnHomeBtn) returnHomeBtn.addEventListener('click', function() { switchPage('home-page'); });
+        if (viewOrdersBtn) viewOrdersBtn.addEventListener('click', function() { switchPage('orders-page'); });
+        if (newOrderBtn) newOrderBtn.addEventListener('click', function() { switchPage('booking-page'); });
+        if (logo) logo.addEventListener('click', function() { switchPage('home-page'); });
+        footerLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('data-page')) {
+                    e.preventDefault();
+                    switchPage(this.getAttribute('data-page') + '-page');
+                }
+            });
+        });
+        
+        // 默认显示首页
+        switchPage('home-page');
+        
+        // === 4. 订单列表逻辑 (本地化) ===
+        function renderOrdersList() {
+            const ordersListContainer = document.getElementById('orders-list-container');
+            if (orders.length === 0) {
+                ordersListContainer.innerHTML = `
+                    <div class="orders-empty">
+                        <div class="orders-empty-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <h3 class="orders-empty-title">您还没有任何订单</h3>
+                        <p class="orders-empty-text">快去预约我们的服务吧，我们将为您提供专业的健康餐饮服务！</p>
+                        <button class="hero-btn" id="empty-order-btn" style="max-width: 200px;">立即预约</button>
+                    </div>`;
+                document.getElementById('empty-order-btn').addEventListener('click', function() { switchPage('booking-page'); });
+                return;
+            }
+            
+            const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date));
+            let ordersHTML = '<div class="orders-list">';
+            
+            sortedOrders.forEach(order => {
+                let statusText = '', statusClass = '';
+                switch(order.status) {
+                    case 'pending': statusText = '待确认'; statusClass = 'pending'; break;
+                    case 'confirmed': statusText = '已确认'; statusClass = 'confirmed'; break;
+                    case 'completed': statusText = '已完成'; statusClass = 'completed'; break;
+                    default: statusText = '待确认'; statusClass = 'pending';
+                }
+                
+                ordersHTML += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info"><div class="order-number">订单号：${order.id}</div><div class="order-date">下单时间：${order.date}</div></div>
+                            <div class="order-status ${statusClass}">${statusText}</div>
+                        </div>
+                        <div class="order-body">
+                            <div class="order-details">
+                                <div class="order-detail"><div class="order-detail-label">服务类型</div><div class="order-detail-value">${order.serviceName}</div></div>
+                                <div class="order-detail"><div class="order-detail-label">服务频率</div><div class="order-detail-value">${order.frequency_name || order.frequency}</div></div>
+                                <div class="order-detail"><div class="order-detail-label">联系人</div><div class="order-detail-value">${order.name}</div></div>
+                                <div class="order-detail"><div class="order-detail-label">服务地址</div><div class="order-detail-value">${order.address}</div></div>
+                                <div class="order-detail"><div class="order-detail-label">服务时间</div><div class="order-detail-value">${order.service_time}</div></div>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">¥${order.price}</div>
+                            <div class="order-actions">
+                                <button class="order-action-btn view" data-id="${order.id}">查看详情</button>
+                                ${order.status === 'pending' ? '<button class="order-action-btn cancel" data-id="' + order.id + '">取消订单</button>' : ''}
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            
+            ordersHTML += '</div>';
+            ordersListContainer.innerHTML = ordersHTML;
+            
+            document.querySelectorAll('.order-action-btn.view').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-id');
+                    const order = orders.find(o => o.id === orderId);
+                    if (order) {
+                        let details = `订单详情：\n\n订单号：${order.id}\n服务类型：${order.serviceName}\n服务频率：${order.frequency_name}\n联系人：${order.name}\n联系电话：${order.phone}\n服务地址：${order.address}\n用餐人数：${order.people_name}\n服务时间：${order.service_time}\n支付方式：${order.payment_method}\n\n特殊需求：${order.needs.join(', ') || '无'}\n饮食禁忌：${order.restrictions.join(', ') || '无'}\n\n订单金额：¥${order.price}`;
+                        alert(details);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.order-action-btn.cancel').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-id');
+                    if (confirm('确定要取消此订单吗？')) {
+                        const orderIndex = orders.findIndex(o => o.id === orderId);
+                        if (orderIndex !== -1) {
+                            orders.splice(orderIndex, 1);
+                            saveOrders(); // 保存更新
+                            renderOrdersList();
+                            alert('订单已取消！');
+                        }
+                    }
+                });
+            });
+        }
+
+        // === 5. 套餐添加逻辑 (本地化) ===
+        document.querySelectorAll('.pricing-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const planName = this.getAttribute('data-plan');
+                
+                if (planName === '公益基础套餐') {
+                    const greenChannel = document.getElementById('green-channel');
+                    if (greenChannel) {
+                        greenChannel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        greenChannel.style.transition = "transform 0.3s, box-shadow 0.3s";
+                        greenChannel.style.transform = "scale(1.02)";
+                        greenChannel.style.boxShadow = "0 0 0 4px rgba(76, 175, 80, 0.5)";
+                        setTimeout(() => {
+                            greenChannel.style.transform = "none";
+                            greenChannel.style.boxShadow = "0 12px 30px rgba(76,175,80,0.25)";
+                        }, 500);
+                    }
+                    return;
+                }
+
+                const planPrice = planName === '家庭健康套餐' ? 50 : null;
+                
+                if (planPrice !== null) {
+                    cart.push({
+                        id: 'plan-' + Date.now(),
+                        name: planName,
+                        desc: '移动厨房服务套餐',
+                        price: planPrice,
+                        quantity: 1,
+                        icon: 'fas fa-utensils'
+                    });
+                    saveCart();
+                    alert(`"${planName}" 已添加到购物车！`);
+                } else {
+                    alert("请联系我们的客服定制企业团餐服务！\n\n服务热线：400-123-4567");
+                }
+            });
+        });
+
+        // === 6. 绿色通道审核逻辑 (模拟) ===
+        const greenSubmitBtn = document.querySelector('#green-channel button');
+        const greenModal = document.getElementById('green-channel-modal');
+        const goToBookBtn = document.getElementById('go-to-book-btn');
+
+        if(greenSubmitBtn) {
+            greenSubmitBtn.addEventListener('click', function() {
+                const greenFile = document.getElementById('green-file-input');
+                if (!greenFile || greenFile.files.length === 0) {
+                    alert('请先上传审核材料证明！'); 
+                    return; 
+                }
+
+                const originalText = this.innerText;
+                this.innerText = "材料上传中... (模拟审核)";
+                this.style.opacity = "0.7";
+                this.disabled = true;
+
+                setTimeout(() => {
+                    this.innerText = "审核通过！";
+                    this.style.background = "#2e7d32";
+                    
+                    setTimeout(() => {
+                        activateGreenChannel();
+                        greenModal.classList.add('active');
+                        this.innerText = originalText;
+                        this.style.opacity = "1";
+                        this.disabled = false;
+                    }, 500);
+                }, 1500);
+            });
+        }
+
+        function activateGreenChannel() {
+            isGreenChannelUser = true;
+            const simpleOpt = document.getElementById('opt-simple');
+            const familyOpt = document.getElementById('opt-family');
+            
+            if(simpleOpt) {
+                simpleOpt.setAttribute('data-price', '0');
+                simpleOpt.querySelector('.service-price').innerHTML = `
+                    <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">¥50</span> 
+                    <span style="color: #2e7d32; font-size: 1.2rem;">¥0</span> 
+                    <span style="color: #e67e22; font-size: 0.8rem;">(公益价)</span>
+                `;
+                simpleOpt.style.borderColor = "#4caf50";
+                simpleOpt.style.background = "#e8f5e9";
+            }
+        }
+
+        if(goToBookBtn) {
+            goToBookBtn.addEventListener('click', function() {
+                greenModal.classList.remove('active');
+                switchPage('booking-page');
+                const simpleOpt = document.getElementById('opt-simple');
+                if(simpleOpt) simpleOpt.click();
+            });
+        }
+
+        // === 7. AI 定制逻辑 (本地化) ===
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const aiResult = document.getElementById('ai-result');
+        
+        if (analyzeBtn) {
+            analyzeBtn.addEventListener('click', function() {
+                const peopleCount = document.getElementById('people-count').value;
+                const servicePeriod = document.getElementById('service-period').value;
+                const specialNeeds = getSelectedCheckboxValues('special-needs');
+                const dietRestrictions = getSelectedCheckboxValues('diet-restrictions');
+                const tastePreference = getSelectedCheckboxValues('taste-preference');
+                const additionalRequirements = document.getElementById('additional-requirements').value;
+                
+                let analysis = `根据您的需求，AI系统为您推荐以下方案：\n\n👥 用餐人数：${peopleCount}人\n📅 服务周期：${servicePeriod}天\n`;
+                if (specialNeeds.length > 0) analysis += `❤️ 特殊需求：${specialNeeds.join(', ')}\n`;
+                if (dietRestrictions.length > 0) analysis += `🚫 饮食禁忌：${dietRestrictions.join(', ')}\n`;
+                if (tastePreference.length > 0) analysis += `👅 口味偏好：${tastePreference.join(', ')}\n`;
+                
+                const tags = ['均衡营养', '个性化定制'];
+                if (specialNeeds.includes('三高饮食')) tags.push('低盐低脂');
+                
+                aiResult.innerHTML = `
+                    <h4 class="ai-result-title"><i class="fas fa-lightbulb"></i> 推荐方案</h4>
+                    <p style="color: var(--gray-color); font-size: 0.95rem; margin-bottom: 15px; white-space: pre-line;">${analysis}</p>
+                    <div class="ai-tags">${tags.map(tag => `<div class="ai-tag">${tag}</div>`).join('')}</div>
+                    <div class="mt-20" style="background-color: rgba(240, 247, 255, 0.5); border-radius: var(--border-radius); padding: 15px; margin-top: 20px;">
+                        <p style="color: var(--info-color); font-size: 0.9rem; font-weight: 500;"><i class="fas fa-info-circle"></i> 已为您自动生成定制方案并加入购物车</p>
+                    </div>`;
+                
+                cart.push({
+                    id: 'custom-' + Date.now(),
+                    name: '个性化定制方案',
+                    desc: `AI智能推荐方案（${peopleCount}人，${servicePeriod}天）`,
+                    price: 50 * servicePeriod,
+                    quantity: 1,
+                    icon: 'fas fa-robot'
+                });
+                saveCart();
+                alert(`AI分析完成！个性化方案已生成并添加到购物车。`);
+            });
+        }
+
+        function getSelectedCheckboxValues(containerId) {
+            const container = document.getElementById(containerId);
+            const checkedCheckboxes = container.querySelectorAll('input:checked');
+            const values = [];
+            checkedCheckboxes.forEach(checkbox => { values.push(checkbox.closest('.checkbox-item').getAttribute('data-value')); });
+            return values;
+        }
+
+        function bindCheckboxEvents() {
+            const checkboxItems = document.querySelectorAll('#customize-page .checkbox-item');
+            checkboxItems.forEach(item => {
+                const newItem = item.cloneNode(true);
+                item.parentNode.replaceChild(newItem, item);
+                newItem.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input');
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
+                });
+            });
+        }
+        bindCheckboxEvents();
+
+        // === 8. 预约流程核心逻辑 (重要修改部分) ===
+        function initBookingProcess() {
+            let currentStep = 1;
+            const totalSteps = 5;
+            // 初始化数据对象
+            let bookingData = { 
+                service: 'simple', serviceName: '简单餐食制作', price: 50, 
+                frequency: 'weekly', frequencyName: '每周一次', 
+                name: '', phone: '', address: '', 
+                people: '2-3', peopleName: '2-3人', 
+                time: '', 
+                needs: ['减脂健身'], restrictions: ['不吃葱姜蒜'], 
+                taste: '清淡', tasteName: '清淡', 
+                payment: 'wechat', paymentName: '微信支付' 
+            };
+            
+            if(isGreenChannelUser) {
+                bookingData.price = 0;
+            }
+
+            function updateSteps() {
+                document.querySelectorAll('.step').forEach((step, index) => { index + 1 === currentStep ? step.classList.add('active') : step.classList.remove('active'); });
+                document.querySelectorAll('.booking-step').forEach((step, index) => { index + 1 === currentStep ? step.classList.add('active') : step.classList.remove('active'); });
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                
+                if (currentStep === 1) { prevBtn.style.display = 'none'; nextBtn.textContent = '下一步'; }
+                else if (currentStep === totalSteps) { prevBtn.style.display = 'inline-block'; nextBtn.style.display = 'none'; }
+                else if (currentStep === totalSteps - 1) { prevBtn.style.display = 'inline-block'; nextBtn.textContent = '确认支付'; nextBtn.style.display = 'inline-block'; }
+                else { prevBtn.style.display = 'inline-block'; nextBtn.textContent = '下一步'; nextBtn.style.display = 'inline-block'; }
+                if (currentStep === 4) updateOrderSummary();
+            }
+            
+            function updateOrderSummary() {
+                let totalPrice = bookingData.price;
+                if (isGreenChannelUser && bookingData.service === 'simple') {
+                    totalPrice = 0;
+                } else {
+                    if (bookingData.frequency === 'weekly') totalPrice *= 4;
+                    if (bookingData.frequency === 'biweekly') totalPrice *= 8;
+                    if (bookingData.frequency === 'monthly') totalPrice *= 1;
+                }
+
+                document.getElementById('summary-service').textContent = bookingData.serviceName;
+                document.getElementById('summary-frequency').textContent = bookingData.frequencyName;
+                document.getElementById('summary-name').textContent = bookingData.name || '未填写';
+                document.getElementById('summary-phone').textContent = bookingData.phone || '未填写';
+                document.getElementById('summary-address').textContent = bookingData.address || '未填写';
+                document.getElementById('summary-people').textContent = bookingData.peopleName;
+                document.getElementById('summary-time').textContent = bookingData.time || '未选择';
+                document.getElementById('summary-needs').textContent = bookingData.needs.join(', ');
+                document.getElementById('summary-restrictions').textContent = bookingData.restrictions.join(', ');
+                document.getElementById('summary-taste').textContent = bookingData.tasteName;
+                document.getElementById('summary-total').textContent = '¥' + totalPrice;
+            }
+            
+            // 绑定选择事件
+            document.querySelectorAll('.service-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.service = this.getAttribute('data-service');
+                    bookingData.serviceName = this.querySelector('.service-name').textContent;
+                    bookingData.price = parseInt(this.getAttribute('data-price'));
+                });
+            });
+            
+            document.querySelectorAll('.radio-option[data-frequency]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.radio-option[data-frequency]').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.frequency = this.getAttribute('data-frequency');
+                    bookingData.frequencyName = this.querySelector('label').textContent;
+                });
+            });
+            
+            // 输入框绑定
+            document.getElementById('contact-name').addEventListener('input', function() { bookingData.name = this.value; });
+            document.getElementById('contact-phone').addEventListener('input', function() { bookingData.phone = this.value; });
+            document.getElementById('service-address').addEventListener('input', function() { bookingData.address = this.value; });
+            document.getElementById('service-time').addEventListener('change', function() { if(this.value) bookingData.time = new Date(this.value).toLocaleString('zh-CN', {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}); });
+            
+            document.querySelectorAll('.radio-option[data-people]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.radio-option[data-people]').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.people = this.getAttribute('data-people');
+                    bookingData.peopleName = this.querySelector('label').textContent;
+                });
+            });
+            
+            // 多选框绑定
+            document.querySelectorAll('.checkbox-option[data-need]').forEach(option => {
+                option.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input');
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
+                    const need = this.getAttribute('data-need');
+                    if (checkbox.checked) {
+                        if (!bookingData.needs.includes(need)) bookingData.needs.push(need);
+                    } else {
+                        bookingData.needs = bookingData.needs.filter(n => n !== need);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.checkbox-option[data-restriction]').forEach(option => {
+                option.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input');
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.checked ? this.classList.add('selected') : this.classList.remove('selected');
+                    const r = this.getAttribute('data-restriction');
+                    if (checkbox.checked) {
+                        if (!bookingData.restrictions.includes(r)) bookingData.restrictions.push(r);
+                    } else {
+                        bookingData.restrictions = bookingData.restrictions.filter(item => item !== r);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.radio-option[data-taste]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.radio-option[data-taste]').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.taste = this.getAttribute('data-taste');
+                    bookingData.tasteName = this.querySelector('label').textContent;
+                });
+            });
+            
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.payment = this.getAttribute('data-payment');
+                    bookingData.paymentName = this.querySelector('.payment-name').textContent;
+                });
+            });
+
+            // 下一步按钮逻辑
+            document.getElementById('next-btn').addEventListener('click', function() {
+                if (currentStep === 1 && !bookingData.service) { alert('请选择服务类型'); return; }
+                else if (currentStep === 2) {
+                    if (!bookingData.name.trim()) { alert('请输入联系人姓名'); document.getElementById('contact-name').focus(); return; }
+                    if (!bookingData.phone.trim()) { alert('请输入联系电话'); document.getElementById('contact-phone').focus(); return; }
+                    if (!bookingData.address.trim()) { alert('请输入服务地址'); document.getElementById('service-address').focus(); return; }
+                    if (!bookingData.time) { alert('请选择服务时间'); document.getElementById('service-time').focus(); return; }
+                } else if (currentStep === 4) {
+                    // === 关键修改：提交订单不再调用 Fetch API ===
+                    
+                    const orderNumber = 'HL' + new Date().getFullYear() + (new Date().getMonth() + 1).toString().padStart(2, '0') + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                    document.getElementById('order-number').textContent = orderNumber;
+                    
+                    const today = new Date();
+                    const orderDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+                    
+                    let totalPrice = bookingData.price;
+                    if(isGreenChannelUser && bookingData.service === 'simple') {
+                        totalPrice = 0;
+                    } else {
+                        if (bookingData.frequency === 'weekly') totalPrice *= 4;
+                        if (bookingData.frequency === 'biweekly') totalPrice *= 8;
+                        if (bookingData.frequency === 'monthly') totalPrice *= 1;
+                    }
+                    
+                    // 构建订单数据
+                    const newOrder = {
+                        id: orderNumber,
+                        date: orderDate,
+                        status: 'pending', // 默认状态
+                        serviceName: bookingData.serviceName,
+                        frequency: bookingData.frequency,
+                        frequency_name: bookingData.frequencyName,
+                        name: bookingData.name,
+                        phone: bookingData.phone,
+                        address: bookingData.address,
+                        people: bookingData.people,
+                        people_name: bookingData.peopleName,
+                        service_time: bookingData.time,
+                        needs: bookingData.needs,
+                        restrictions: bookingData.restrictions,
+                        taste: bookingData.taste,
+                        taste_name: bookingData.tasteName,
+                        price: totalPrice,
+                        payment_method: bookingData.paymentName,
+                        is_charity: isGreenChannelUser
+                    };
+                    
+                    // === 模拟保存到后端（实际保存到 localStorage）===
+                    try {
+                        orders.push(newOrder); // 加入全局订单数组
+                        saveOrders(); // 持久化到本地
+                        
+                        cart = []; // 清空购物车
+                        saveCart(); // 持久化清空
+                        
+                        console.log('订单创建成功 (本地模拟):', newOrder);
+                    } catch (error) {
+                        console.error('提交订单出错:', error);
+                        alert('提交订单失败，请重试');
+                        return;
+                    }
+                }
+                
+                // 进入下一步
+                if (currentStep < totalSteps) { 
+                    currentStep++; 
+                    updateSteps(); 
+                }
+            });
+            
+            document.getElementById('prev-btn').addEventListener('click', function() { if (currentStep > 1) { currentStep--; updateSteps(); } });
+            updateSteps();
+        }
+        
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    });
+    </script>
 </body>
 </html>
