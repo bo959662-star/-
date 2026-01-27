@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>烹小厨公益移动厨房 - 预约服务 (本地演示版)</title>
+    <title>烹小厨公益移动厨房 - 预约服务 (完整功能版)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
     <style>
-        /* --- 基础变量 --- */
+        /* --- 基础变量 (保持原样) --- */
         :root {
             --primary-color: #ff6b35; 
             --primary-dark: #e55a2b;
@@ -329,6 +329,20 @@
             background: #f39c12; color: white;
             padding: 2px 6px; border-radius: 0 0 0 8px; font-size: 0.8rem;
         }
+
+        /* 当面结算 - 紫色主题 (新增) */
+        .payment-method[data-payment="offline"] .payment-icon { color: #8e44ad; }
+        .payment-method[data-payment="offline"].selected {
+            border-color: #8e44ad;
+            background-color: #fcf4ff;
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.2);
+        }
+        .payment-method[data-payment="offline"].selected::after {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 0; right: 0;
+            background: #8e44ad; color: white;
+            padding: 2px 6px; border-radius: 0 0 0 8px; font-size: 0.8rem;
+        }
         
         .booking-footer { display: flex; justify-content: space-between; padding: 20px 30px; background-color: rgba(255, 250, 240, 0.8); border-top: 1px solid rgba(245, 240, 230, 0.8); }
         .booking-btn { padding: 14px 30px; border-radius: var(--border-radius); font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; }
@@ -492,6 +506,55 @@
             font-size: 0.85rem;
         }
         .mt-30 { margin-top: 30px; }
+
+        /* ===== 新增功能样式：菜单/厨师/发票 ===== */
+        .menu-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: 0.2s;
+            cursor: pointer;
+            background: #fff;
+        }
+        .menu-card img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; margin-bottom: 5px; }
+        .menu-card-name { font-size: 0.8rem; font-weight: bold; color: var(--secondary-color); }
+        
+        .chef-card {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+        }
+        .chef-card.selected { border-color: var(--primary-color); background: #fffaf0; }
+        .chef-card.selected::after {
+            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute; top: 10px; right: 10px; color: var(--primary-color);
+        }
+        .chef-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+        .chef-details { text-align: left; }
+        .chef-name { font-weight: bold; font-size: 1rem; }
+        .chef-specialty { font-size: 0.8rem; color: #666; }
+        
+        .transport-alert {
+            margin-top: 10px; padding: 15px; background: #e8f5e9; border: 1px solid #4caf50; border-radius: 8px; color: #2e7d32; display: none;
+        }
+        
+        .invoice-detail {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .invoice-row { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
+        .invoice-total-row { font-weight: bold; color: var(--primary-color); display: flex; justify-content: space-between; margin-top: 10px; padding-top: 5px; border-top: 2px solid #eee; }
     </style>
 </head>
 <body>
@@ -593,7 +656,7 @@
                     <!-- 菜品卡片 1 -->
                     <div class="dish-card">
                         <div class="dish-img-container">
-                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="健康轻食餐">
+                            <img src="images\轻食碗.jpg" alt="健康轻食餐">
                             <span class="dish-tag">公益特供</span>
                         </div>
                         <div class="dish-info">
@@ -609,7 +672,7 @@
                     <!-- 菜品卡片 2 -->
                     <div class="dish-card">
                         <div class="dish-img-container">
-                            <img src=".\images\hot.jpg" alt="家常红烧肉">
+                            <img src="images\hot.jpg" alt="家常红烧肉">
                             <span class="dish-tag">家宴必点</span>
                         </div>
                         <div class="dish-info">
@@ -625,7 +688,7 @@
                     <!-- 菜品卡片 3 -->
                     <div class="dish-card">
                         <div class="dish-img-container">
-                            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="养生滋补汤">
+                            <img src="images\山药排骨汤.jpg" alt="养生滋补汤">
                             <span class="dish-tag">营养滋补</span>
                         </div>
                         <div class="dish-info">
@@ -641,7 +704,7 @@
                     <!-- 菜品卡片 4 -->
                     <div class="dish-card">
                         <div class="dish-img-container">
-                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="清炒时蔬">
+                            <img src="images\蒜蓉蔬菜.jpg" alt="清炒时蔬">
                             <span class="dish-tag">绿色有机</span>
                         </div>
                         <div class="dish-info">
@@ -669,7 +732,7 @@
                         <h3 class="pricing-title">公益基础套餐</h3>
                         <p class="pricing-subtitle">经济困难家庭、孤寡老人、留守孩童家庭</p>
                         <div class="pricing-price">免费</div>
-                        <div class="pricing-period">仅支付公共交通费</div>
+                        <div class="pricing-period">需支付公共交通费 (不报销)</div>
                     </div>
                     <div class="pricing-body">
                         <ul class="pricing-features">
@@ -818,7 +881,14 @@
                         <p class="step-subtitle">请填写您的联系信息和用餐需求</p>
                         <div class="form-group"><label class="form-label">联系人姓名</label><input type="text" class="form-control" id="contact-name" placeholder="请输入您的姓名"></div>
                         <div class="form-group"><label class="form-label">联系电话</label><input type="tel" class="form-control" id="contact-phone" placeholder="请输入您的手机号码"></div>
-                        <div class="form-group"><label class="form-label">服务地址</label><input type="text" class="form-control" id="service-address" placeholder="请输入详细地址"></div>
+                        <div class="form-group">
+                            <label class="form-label">服务地址 (填写后自动计算交通费)</label>
+                            <input type="text" class="form-control" id="service-address" placeholder="请输入详细地址">
+                            <!-- 新增：交通费提示框 -->
+                            <div id="transport-fee-container" class="transport-alert" style="display:none;">
+                                <i class="fas fa-bus"></i> <strong>公益绿色通道：</strong> 已为您自动计算公共交通费用：<span id="transport-fee-display" style="font-weight:bold;">¥0</span> (将计入订单，实报实销)
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="form-label">用餐人数</label>
                             <div class="radio-group">
@@ -869,18 +939,34 @@
                                 <div class="checkbox-option" data-restriction="不吃内脏"><input type="checkbox" id="restriction-organs"><label for="restriction-organs">不吃内脏</label></div>
                             </div>
                         </div>
+                        
+                        <!-- 修改：口味选择 (添加监听事件以显示菜单) -->
                         <div class="form-group">
-                            <label class="form-label">口味偏好</label>
-                            <div class="radio-group">
+                            <label class="form-label">口味偏好 (点击显示对应菜单)</label>
+                            <div class="radio-group" id="taste-radio-group">
                                 <div class="radio-option selected" data-taste="清淡"><input type="radio" name="taste" id="taste-light" checked><label for="taste-light">清淡</label></div>
-                                <div class="radio-option" data-taste="中等"><input type="radio" name="taste" id="taste-medium"><label for="taste-medium">中等</label></div>
-                                <div class="radio-option" data-taste="偏重"><input type="radio" name="taste" id="taste-heavy"><label for="taste-heavy">偏重</label></div>
-                                <div class="radio-option" data-taste="家乡味"><input type="radio" name="taste" id="taste-hometown"><label for="taste-hometown">家乡味</label></div>
-                                <!-- 新增选项 -->
-                                <div class="radio-option" data-taste="酸甜"><input type="radio" name="taste" id="taste-sour-sweet"><label for="taste-sour-sweet">酸甜</label></div>
-                                <div class="radio-option" data-taste="麻辣"><input type="radio" name="taste" id="taste-spicy-numb"><label for="taste-spicy-numb">麻辣</label></div>
+                                <div class="radio-option" data-taste="家常"><input type="radio" name="taste" id="taste-medium"><label for="taste-medium">家常</label></div>
+                                <div class="radio-option" data-taste="香辣"><input type="radio" name="taste" id="taste-heavy"><label for="taste-heavy">香辣</label></div>
+                                <div class="radio-option" data-taste="甜口"><input type="radio" name="taste" id="taste-hometown"><label for="taste-hometown">甜口</label></div>
                             </div>
                         </div>
+
+                        <!-- 新增：动态菜单推荐 -->
+                        <div class="form-group" style="background: #fdfdfd; padding: 15px; border-radius: 12px; border: 1px dashed #ddd;">
+                            <label class="form-label"><i class="fas fa-book-open"></i> 推荐菜品参考</label>
+                            <div id="menu-recommendation" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+                                <!-- 动态注入菜单 -->
+                            </div>
+                        </div>
+
+                        <!-- 新增：厨师选择 -->
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-user-friends"></i> 选择为您服务的厨师 (团餐可多选)</label>
+                            <div id="chef-selection" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px;">
+                                <!-- 动态注入厨师 -->
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="form-label">其他要求（可选）</label>
                             <textarea class="form-control" id="additional-notes" rows="3" placeholder="请详细描述您的其他需求，如特定菜品、文化诉求、特殊场合等..."></textarea>
@@ -938,7 +1024,25 @@
                                     <td class="ot-label"><i class="fas fa-utensil-spoon"></i> 口味偏好</td>
                                     <td class="ot-value" id="summary-taste">清淡</td>
                                 </tr>
+                                <!-- 新增：展示选择的厨师 -->
+                                <tr>
+                                    <td class="ot-label"><i class="fas fa-user-md"></i> 预约厨师</td>
+                                    <td class="ot-value" id="summary-chefs">未选择</td>
+                                </tr>
                             </table>
+                            
+                            <!-- 新增：家宴发票展示区域 -->
+                            <div id="invoice-display" style="display:none; padding: 15px; background: #fff; border-top: 1px dashed #ddd;">
+                                <div class="invoice-detail" style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                                    <h4 style="text-align:center; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px;">食材采购预估单</h4>
+                                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>新鲜肉类/海鲜</span><span>¥350.00</span></div>
+                                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>有机时蔬</span><span>¥80.00</span></div>
+                                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>调料/杂项</span><span>¥30.00</span></div>
+                                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--primary-color); border-top:1px solid #eee; padding-top:5px;"><span>预估食材总额</span><span>¥460.00</span></div>
+                                    <p style="font-size:0.75rem; color:#999; margin-top:5px; text-align:center;">* 家宴服务费为食材费的20%，食材凭发票实销。</p>
+                                </div>
+                            </div>
+
                             <div class="total-section">
                                 <span class="total-label">订单总额</span>
                                 <span class="total-amount" id="summary-total">¥50</span>
@@ -963,6 +1067,12 @@
                                     <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
                                     <div class="payment-name">银行卡</div>
                                     <div class="payment-desc">支持储蓄卡/信用卡</div>
+                                </div>
+                                <!-- 新增：当面结算 -->
+                                <div class="payment-method" data-payment="offline">
+                                    <div class="payment-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                                    <div class="payment-name">当面结算</div>
+                                    <div class="payment-desc">服务完成后支付</div>
                                 </div>
                             </div>
                         </div>
@@ -1168,7 +1278,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 烹小厨公益移动厨房. 保留所有权利. | 公益服务热线：400-123-4567</p>
+                <p>© 2025 烹小厨公益移动厨房. 保留所有权利. | 公益服务热线：400-123-4567</p>
             </div>
         </div>
     </footer>
@@ -1177,6 +1287,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         // === 全局状态变量 ===
         let isGreenChannelUser = false; 
+        let transportFee = 0; // 新增：交通费
+        let selectedChefs = []; // 新增：选中的厨师
 
         // === 1. 初始化本地数据模拟 (替代后端API) ===
         // 从本地存储加载购物车和订单，如果没有则初始化为空数组
@@ -1628,6 +1740,42 @@
         bindCheckboxEvents();
 
         // === 8. 预约流程核心逻辑 (重要修改部分) ===
+        // --- 模拟菜单数据 ---
+        const menuDB = {
+            '清淡': [
+                {name: '清蒸鲈鱼', img: 'images/清蒸鲈鱼.jpg'},
+                {name: '白灼菜心', img: 'images/白灼菜心.jpg'},
+                {name: '冬瓜排骨汤', img: 'images/冬瓜排骨汤.jpg'},
+                {name: '西芹百合', img: 'images/西芹百合.jpg'}
+            ],
+            '家常': [
+                {name: '红烧肉', img: 'images/hot.jpg'},
+                {name: '番茄炒蛋', img: 'images/番茄炒蛋.jpg'},
+                {name: '土豆炖牛腩', img: 'images/土豆炖牛腩.jpg'},
+                {name: '青椒肉丝', img: 'images/青椒炒肉.jpg'}
+            ],
+            '香辣': [
+                {name: '麻婆豆腐', img: 'images/麻婆豆腐.jpg'},
+                {name: '辣子鸡丁', img: 'images/辣子鸡丁.jpg'},
+                {name: '水煮牛肉', img: 'images/水煮牛肉.jpg'},
+                {name: '干煸四季豆', img: 'images/干煸四季豆.jpg'}
+            ],
+            '甜口': [
+                {name: '菠萝咕咾肉', img: 'images/菠萝.jpg'},
+                {name: '糖醋排骨', img: 'images/糖醋排骨.jpg'},
+                {name: '松鼠桂鱼', img: 'images/松鼠桂鱼.jpg'},
+                {name: '拔丝地瓜', img: 'images/拔丝地瓜.jpg'}
+            ]
+        };
+
+        // --- 模拟厨师数据 ---
+        const chefDB = [
+            {name: '张雅惠', avatar: 'images/张雅惠.png', specialty: '擅长川湘菜、家常菜'},
+            {name: '谢梦雨', avatar: 'images/谢梦雨.png', specialty: '擅长面点、家常菜'},
+            {name: '冉茂春', avatar: 'images/冉茂春.png', specialty: '擅长粤菜、煲汤'},
+            {name: '陆艺灵', avatar: 'images/陆艺灵.png', specialty: '营养学专业 / 摆盘'}
+        ];
+
         function initBookingProcess() {
             let currentStep = 1;
             const totalSteps = 5;
@@ -1660,6 +1808,99 @@
                 if (currentStep === 4) updateOrderSummary();
             }
             
+            // --- Step 2 逻辑: 交通费计算 ---
+            const addressInput = document.getElementById('service-address');
+            addressInput.addEventListener('blur', function() {
+                bookingData.address = this.value;
+                if(isGreenChannelUser && this.value.trim() !== "") {
+                    // 模拟计算交通费 (随机 3-10 元)
+                    const fee = Math.floor(Math.random() * 8) + 3;
+                    transportFee = fee;
+                    document.getElementById('transport-fee-container').style.display = 'block';
+                    document.getElementById('transport-fee-display').textContent = '¥' + fee;
+                } else {
+                    document.getElementById('transport-fee-container').style.display = 'none';
+                    transportFee = 0;
+                }
+            });
+
+            // --- Step 3 逻辑: 菜单渲染 ---
+            function renderMenu(taste) {
+                const container = document.getElementById('menu-recommendation');
+                container.innerHTML = '';
+                const items = menuDB[taste] || menuDB['清淡'];
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'menu-card';
+                    card.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="menu-card-name">${item.name}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+            // 初始渲染
+            renderMenu('清淡');
+
+            // 监听口味变化
+            document.querySelectorAll('.radio-option[data-taste]').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    const taste = this.getAttribute('data-taste');
+                    renderMenu(taste);
+                });
+            });
+
+            // --- Step 3 逻辑: 厨师选择 ---
+            function renderChefs() {
+                const container = document.getElementById('chef-selection');
+                container.innerHTML = '';
+                
+                chefDB.forEach(chef => {
+                    const card = document.createElement('div');
+                    card.className = 'chef-card';
+                    card.setAttribute('data-name', chef.name);
+                    card.innerHTML = `
+                        <img src="${chef.avatar}" class="chef-avatar">
+                        <div class="chef-details">
+                            <div class="chef-name">${chef.name}</div>
+                            <div class="chef-specialty">${chef.specialty}</div>
+                        </div>
+                    `;
+                    
+                    card.addEventListener('click', function() {
+                        const name = this.getAttribute('data-name');
+                        if (bookingData.service === 'group') {
+                            // 多选逻辑
+                            if (selectedChefs.includes(name)) {
+                                selectedChefs = selectedChefs.filter(n => n !== name);
+                                this.classList.remove('selected');
+                            } else {
+                                selectedChefs.push(name);
+                                this.classList.add('selected');
+                            }
+                        } else {
+                            // 单选逻辑
+                            selectedChefs = [name];
+                            document.querySelectorAll('.chef-card').forEach(c => c.classList.remove('selected'));
+                            this.classList.add('selected');
+                        }
+                    });
+                    
+                    container.appendChild(card);
+                });
+            }
+            renderChefs();
+            
+            // 监听服务类型变化以重置厨师选择
+            document.querySelectorAll('.service-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    bookingData.service = this.getAttribute('data-service');
+                    selectedChefs = [];
+                    document.querySelectorAll('.chef-card').forEach(c => c.classList.remove('selected'));
+                });
+            });
+
+            // --- Step 4: 摘要更新 ---
             function updateOrderSummary() {
                 let totalPrice = bookingData.price;
                 if (isGreenChannelUser && bookingData.service === 'simple') {
@@ -1680,7 +1921,21 @@
                 document.getElementById('summary-needs').textContent = bookingData.needs.join(', ');
                 document.getElementById('summary-restrictions').textContent = bookingData.restrictions.join(', ');
                 document.getElementById('summary-taste').textContent = bookingData.tasteName;
-                document.getElementById('summary-total').textContent = '¥' + totalPrice;
+                document.getElementById('summary-chefs').textContent = selectedChefs.length > 0 ? selectedChefs.join(', ') : '系统随机分配';
+                
+                // 家宴发票逻辑
+                const invoiceDiv = document.getElementById('invoice-display');
+                const totalLabel = document.getElementById('summary-total');
+                
+                if (bookingData.service === 'family') {
+                    invoiceDiv.style.display = 'block';
+                    totalLabel.innerHTML = '¥' + (transportFee + 60) + ' <span style="font-size:0.8rem; font-weight:normal">(含预估服务费+交通费)</span>'; 
+                } else {
+                    invoiceDiv.style.display = 'none';
+                    // 加上交通费
+                    let finalTotal = totalPrice + transportFee;
+                    totalLabel.textContent = '¥' + finalTotal + (transportFee > 0 ? ` (含交通费¥${transportFee})` : '');
+                }
             }
             
             // 绑定选择事件
@@ -1706,7 +1961,7 @@
             // 输入框绑定
             document.getElementById('contact-name').addEventListener('input', function() { bookingData.name = this.value; });
             document.getElementById('contact-phone').addEventListener('input', function() { bookingData.phone = this.value; });
-            document.getElementById('service-address').addEventListener('input', function() { bookingData.address = this.value; });
+            // address已在上方单独绑定blur事件
             document.getElementById('service-time').addEventListener('change', function() { if(this.value) bookingData.time = new Date(this.value).toLocaleString('zh-CN', {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}); });
             
             document.querySelectorAll('.radio-option[data-people]').forEach(option => {
@@ -1790,6 +2045,7 @@
                         if (bookingData.frequency === 'biweekly') totalPrice *= 8;
                         if (bookingData.frequency === 'monthly') totalPrice *= 1;
                     }
+                    totalPrice += transportFee; // 加上交通费
                     
                     // 构建订单数据
                     const newOrder = {
